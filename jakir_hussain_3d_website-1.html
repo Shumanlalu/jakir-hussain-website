@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080d19" />
+  <title>Jakir Hussain | Day Trader</title>
+  <style>
+    :root { --bg:#080d19; --panel:rgba(17,27,47,.72); --line:rgba(160,190,255,.16); --text:#f4f7ff; --muted:#9aa9c3; --cyan:#58e1e8; --violet:#9877ff; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--text); background:radial-gradient(ellipse at 75% 12%,#1b2850 0,transparent 38%),radial-gradient(ellipse at 10% 55%,#102b3a 0,transparent 35%),var(--bg); font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif; overflow-x:hidden; }
+    a { color:inherit; text-decoration:none; }
+    .nav { position:fixed; z-index:10; top:0; width:100%; display:flex; justify-content:space-between; align-items:center; padding:20px 7vw; background:rgba(8,13,25,.55); backdrop-filter:blur(18px); border-bottom:1px solid rgba(255,255,255,.06); }
+    .brand { font-weight:800; letter-spacing:.08em; } .brand span { color:var(--cyan); }
+    .navlinks { display:flex; gap:28px; color:var(--muted); font-size:.9rem; } .navlinks a:hover { color:white; }
+    .hero { min-height:100vh; display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:3rem; padding:130px 7vw 80px; max-width:1500px; margin:auto; }
+    .eyebrow { color:var(--cyan); text-transform:uppercase; letter-spacing:.22em; font-size:.76rem; font-weight:700; }
+    h1 { font-size:clamp(3.4rem,8vw,7.4rem); line-height:.93; letter-spacing:-.065em; margin:22px 0; }
+    h1 span { display:block; color:transparent; -webkit-text-stroke:1px rgba(230,240,255,.8); }
+    .lead { color:var(--muted); font-size:1.1rem; line-height:1.8; max-width:560px; }
+    .actions { display:flex; gap:14px; flex-wrap:wrap; margin-top:34px; }
+    .btn { padding:14px 21px; border-radius:999px; font-weight:700; font-size:.9rem; border:1px solid var(--line); transition:.25s; }
+    .btn.primary { color:#061018; background:linear-gradient(110deg,var(--cyan),#a3f5e5); border:0; box-shadow:0 10px 35px #58e1e833; }
+    .btn:hover { transform:translateY(-3px); }
+    .scene { height:540px; position:relative; perspective:1000px; display:grid; place-items:center; }
+    .orb { position:absolute; width:min(36vw,390px); aspect-ratio:1; border-radius:50%; background:radial-gradient(circle at 32% 25%,#d8ffff 0,#5be4e8 8%,#286c9e 28%,#302b72 60%,#0a1025 74%); box-shadow:inset -28px -25px 55px #030716, inset 10px 10px 28px #d6ffff66, 0 0 90px #4bdde855; animation:float 7s ease-in-out infinite; transform-style:preserve-3d; }
+    .ring { position:absolute; width:min(49vw,540px); height:min(19vw,210px); border:2px solid #71e8edaa; border-radius:50%; transform:rotateX(68deg) rotateZ(-24deg); box-shadow:0 0 25px #58e1e855,inset 0 0 20px #58e1e822; animation:orbit 16s linear infinite; }
+    .ring.two { width:min(56vw,610px); height:min(22vw,240px); border-color:#9b80ff88; transform:rotateX(68deg) rotateZ(35deg); animation-duration:22s; animation-direction:reverse; }
+    .floating-card { position:absolute; right:2%; bottom:9%; padding:18px 20px; border:1px solid var(--line); background:var(--panel); backdrop-filter:blur(16px); border-radius:18px; box-shadow:0 25px 70px #0006; transform:rotateY(-12deg) rotateX(5deg); }
+    .floating-card small { color:var(--muted); display:block; margin-bottom:7px; } .floating-card strong { font-size:1.15rem; }
+    @keyframes float { 0%,100%{transform:translateY(0) rotateY(-12deg)} 50%{transform:translateY(-22px) rotateY(12deg)} }
+    @keyframes orbit { to { transform:rotateX(68deg) rotateZ(336deg); } }
+    section { padding:90px 7vw; max-width:1300px; margin:auto; }
+    .section-title { font-size:clamp(2rem,4vw,3.5rem); letter-spacing:-.04em; margin:12px 0 18px; }
+    .grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:35px; }
+    .card { padding:28px; border:1px solid var(--line); border-radius:24px; background:linear-gradient(145deg,rgba(26,40,67,.8),rgba(10,17,32,.72)); box-shadow:0 20px 60px #0002; }
+    .card .number { color:var(--cyan); font-size:.8rem; letter-spacing:.16em; font-weight:800; }
+    .card h3 { font-size:1.25rem; margin:16px 0 9px; } .card p { color:var(--muted); line-height:1.7; margin:0; }
+    .profile { display:grid; grid-template-columns:.8fr 1.2fr; gap:50px; align-items:center; }
+    .profile-art { min-height:300px; border-radius:28px; border:1px solid var(--line); background:radial-gradient(circle at 50% 35%,#3d9ca8 0,#1b4260 24%,#111c38 65%); display:grid; place-items:center; overflow:hidden; }
+    .profile-art div { font-size:clamp(5rem,12vw,9rem); font-weight:900; letter-spacing:-.1em; color:#dffcff; text-shadow:0 15px 50px #0008; transform:rotateY(-18deg); }
+    .workline { border-left:2px solid var(--cyan); padding:5px 0 5px 20px; margin-top:25px; }
+    .workline strong { display:block; font-size:1.15rem; } .workline span { color:var(--muted); display:block; margin-top:5px; }
+    .note { color:#8d9bb4; font-size:.83rem; line-height:1.6; margin-top:28px; }
+    footer { border-top:1px solid var(--line); padding:30px 7vw; color:var(--muted); text-align:center; font-size:.85rem; }
+    @media(max-width:800px){ .hero{grid-template-columns:1fr;padding-top:130px}.scene{height:390px;grid-row:1}.orb{width:260px}.ring{width:340px;height:130px}.ring.two{width:390px;height:150px}.floating-card{right:0;bottom:0}.grid{grid-template-columns:1fr}.profile{grid-template-columns:1fr}.nav{padding:17px 5vw}.navlinks{gap:14px;font-size:.8rem} }
+    @media(max-width:430px){ .navlinks a:nth-child(2){display:none}.scene{height:320px}.orb{width:220px}.ring{width:290px;height:110px}.ring.two{width:330px;height:125px} }
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="#home">JAKIR<span>.</span></a>
+    <div class="navlinks"><a href="#about">About</a><a href="#trading">Trading</a><a href="#career">Career</a></div>
+  </nav>
+
+  <main>
+    <div class="hero" id="home">
+      <div>
+        <div class="eyebrow">Personal profile · Markets &amp; career</div>
+        <h1>Jakir <span>Hussain.</span></h1>
+        <p class="lead">Day trader with an interest in market movements, trading discipline and continuous learning. Also associated professionally with Maruti Suzuki India Limited.</p>
+        <div class="actions">
+          <a class="btn primary" href="#about">Explore profile</a>
+          <a class="btn" href="#trading">Trading approach</a>
+        </div>
+      </div>
+      <div class="scene" aria-label="Animated abstract 3D orb">
+        <div class="ring"></div><div class="ring two"></div><div class="orb"></div>
+        <div class="floating-card"><small>FOCUS</small><strong>Discipline · Learning</strong></div>
+      </div>
+    </div>
+
+    <section id="about">
+      <div class="eyebrow">01 / About</div>
+      <h2 class="section-title">Driven by curiosity.<br/>Focused on growth.</h2>
+      <p class="lead">A simple introduction to Jakir Hussain, bringing together an interest in day trading and a professional role at Maruti Suzuki India Limited.</p>
+    </section>
+
+    <section id="trading">
+      <div class="eyebrow">02 / Trading</div>
+      <h2 class="section-title">A thoughtful approach<br/>to the markets.</h2>
+      <div class="grid">
+        <article class="card"><div class="number">01 — PLAN</div><h3>Preparation</h3><p>Reviewing market information and defining a plan before making a trading decision.</p></article>
+        <article class="card"><div class="number">02 — DISCIPLINE</div><h3>Risk awareness</h3><p>Recognising that markets involve risk and that no trade or outcome is guaranteed.</p></article>
+        <article class="card"><div class="number">03 — IMPROVE</div><h3>Continuous learning</h3><p>Reflecting on decisions, learning from experience and refining the process over time.</p></article>
+      </div>
+    </section>
+
+    <section id="career">
+      <div class="profile">
+        <div class="profile-art"><div>JH</div></div>
+        <div>
+          <div class="eyebrow">03 / Professional journey</div>
+          <h2 class="section-title">Beyond the charts.</h2>
+          <p class="lead">Alongside his interest in day trading, Jakir Hussain works at Maruti Suzuki India Limited.</p>
+          <div class="workline"><strong>Maruti Suzuki India Limited</strong><span>Professional association · Role/details can be added</span></div>
+          <p class="note">This is a personal profile concept and is not an official Maruti Suzuki India Limited website or endorsement. Trading involves financial risk. Nothing on this page is investment advice.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>© <span id="year"></span> Jakir Hussain · Personal profile</footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
